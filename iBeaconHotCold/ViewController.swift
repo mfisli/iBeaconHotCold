@@ -16,10 +16,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBPeripheralM
     var locationManager: CLLocationManager!
     var blueToothmanager:CBPeripheralManager!
 
-    
     @IBOutlet weak var hotColdLabel: UILabel!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +27,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBPeripheralM
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse) {
-            locationManager.requestWhenInUseAuthorization()
-        }
+        locationManager.requestWhenInUseAuthorization()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,9 +46,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBPeripheralM
         }
     }
     
+    //default UUID of Kontakt beacons: "F7826DA6-4FA2-4E98-8024-BC5B71E0893E"
     func startScanning() {
         let uuid = UUID(uuidString: "F7826DA6-4FA2-4E98-8024-BC5B71E0893E")!
-        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, major: 65535, minor: 0, identifier: "iBeacon")
+        let beaconRegion = CLBeaconRegion(proximityUUID: uuid, major: 65535, minor: 0, identifier: "kontakt")
+        
+        beaconRegion.notifyOnEntry = true
+        beaconRegion.notifyOnExit = true
         
         locationManager.startMonitoring(for: beaconRegion)
         locationManager.startRangingBeacons(in: beaconRegion)
@@ -64,6 +63,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBPeripheralM
             print(beacons)
             updateDistance(beacons[0].proximity)
         } else {
+            print("No beacons in region")
             updateDistance(.unknown)
         }
     }
@@ -117,21 +117,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBPeripheralM
         
         switch peripheral.state {
         case .poweredOn:
-            statusMessage = "Turned On"
+            statusMessage = "  Blue Tooth is turned on."
             
         case .poweredOff:
-            statusMessage = "Please turn on Blue Tooth";
+            statusMessage = "Please turn on Blue Tooth.";
             alert(message: statusMessage)
             
         case .resetting:
-            statusMessage = "Resetting"
+            statusMessage = "Resetting."
             
         case .unauthorized:
-            statusMessage = "Please Authorize Blue Tooth"
+            statusMessage = "Please Authorize Blue Tooth."
             alert(message: statusMessage)
             
         case .unsupported:
-            statusMessage = "Blue Tooth Is Not Supported"
+            statusMessage = "Blue Tooth Is Not Supported on this device."
             alert(message: statusMessage)
             
         default:
@@ -139,6 +139,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, CBPeripheralM
         }
         
         print(statusMessage)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error){
+        print("monitoringDidFailFor")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, rangingBeaconsDidFailFor region: CLBeaconRegion, withError error: Error){
+        print("rangingBeaconsDidFailFor")
+
     }
 }
 
