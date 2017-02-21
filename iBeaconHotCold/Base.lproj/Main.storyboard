@@ -28,16 +28,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-------" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8yV-bc-yXY">
+                                <rect key="frame" x="16" y="451" width="343" height="120"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="64"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tfr-rU-Zum" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="IF8-qg-e1Q"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="tfr-rU-Zum" secondAttribute="bottom" constant="262" id="LRz-fu-A6P"/>
                             <constraint firstItem="tfr-rU-Zum" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="P3w-yM-Led"/>
+                            <constraint firstItem="8yV-bc-yXY" firstAttribute="top" secondItem="tfr-rU-Zum" secondAttribute="bottom" constant="46" id="PsB-OG-pir"/>
+                            <constraint firstItem="8yV-bc-yXY" firstAttribute="leading" secondItem="tfr-rU-Zum" secondAttribute="leading" id="ZxH-Lc-0T5"/>
+                            <constraint firstItem="8yV-bc-yXY" firstAttribute="trailing" secondItem="tfr-rU-Zum" secondAttribute="trailing" id="huX-m1-O80"/>
                             <constraint firstItem="tfr-rU-Zum" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="184" id="qMZ-uK-YMo"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8yV-bc-yXY" secondAttribute="bottom" constant="96" id="xRC-CX-wY1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ScanLabel" destination="8yV-bc-yXY" id="IbU-ey-RvY"/>
                         <outlet property="hotColdLabel" destination="tfr-rU-Zum" id="FIp-aO-HIb"/>
                     </connections>
                 </viewController>
